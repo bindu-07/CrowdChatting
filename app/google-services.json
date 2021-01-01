@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "476393760095",
+    "project_id": "friendlychat-69b0a",
+    "storage_bucket": "friendlychat-69b0a.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:476393760095:android:df3907732a7b50fffd82ea",
+        "android_client_info": {
+          "package_name": "com.binduhait.friendlychat"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "476393760095-9pk48v02eiajf76nv0fp49umu2mtdi0b.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAWt87sJ1NCAlgN9vCdV6I0alJmyn__EaA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "476393760095-9pk48v02eiajf76nv0fp49umu2mtdi0b.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
