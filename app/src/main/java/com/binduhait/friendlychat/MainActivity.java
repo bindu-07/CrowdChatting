@@ -191,6 +191,7 @@ public class MainActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == RC_SIGN_IN && resultCode == RESULT_OK) {
             Toast.makeText(this, "Signed in!", Toast.LENGTH_SHORT).show();
+            mProgressBar.setVisibility(View.VISIBLE);
         } else if (resultCode == RESULT_CANCELED) {
             Toast.makeText(this, "Sign in canceled!", Toast.LENGTH_SHORT).show();
         } else if (requestCode == RC_PHOTO_PICKER && resultCode == RESULT_OK) {
@@ -231,6 +232,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         mFirebaseAuth.addAuthStateListener(mAuthStateListener);
+        mProgressBar.setVisibility(View.VISIBLE);
     }
 
     @Override
@@ -269,6 +271,7 @@ public class MainActivity extends AppCompatActivity {
                 public void onChildAdded(DataSnapshot dataSnapshot, String s) {
                     FriendlyMessage friendlyMessage = dataSnapshot.getValue(FriendlyMessage.class);
                     mMessageAdapter.add(friendlyMessage);
+                    mProgressBar.setVisibility(View.INVISIBLE);
                 }
 
                 public void onChildChanged(DataSnapshot dataSnapshot, String s) {}
