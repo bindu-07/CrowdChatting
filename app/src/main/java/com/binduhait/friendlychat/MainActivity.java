@@ -248,6 +248,14 @@ public class MainActivity extends AppCompatActivity {
             case R.id.sign_out_menu:
                 AuthUI.getInstance().signOut(this);
                 return true;
+            case R.id.settings_menu:{
+                Toast.makeText(this,"Settings - Under-development",Toast.LENGTH_SHORT)
+                        .show();
+            }
+            case R.id.my_profile_menu:{
+                Toast.makeText(this,"My Profile-Under-development",Toast.LENGTH_SHORT)
+                        .show();
+            }
             default:
                 return super.onOptionsItemSelected(item);
         }
