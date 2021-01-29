@@ -22,6 +22,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.binduhait.friendlychat.ui.settingsPage.SettingsActivity;
 import com.firebase.ui.auth.AuthUI;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -104,9 +105,6 @@ public class MainActivity extends AppCompatActivity {
         List<FriendlyMessage> friendlyMessages = new ArrayList<>();
         mMessageAdapter = new MessageAdapter(this, R.layout.item_message, friendlyMessages);
         mMessageListView.setAdapter(mMessageAdapter);
-
-        // Initialize progress bar
-        mProgressBar.setVisibility(ProgressBar.INVISIBLE);
 
         // ImagePickerButton shows an image picker to upload a image for a message
         mPhotoPickerButton.setOnClickListener(new View.OnClickListener() {
@@ -191,7 +189,6 @@ public class MainActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == RC_SIGN_IN && resultCode == RESULT_OK) {
             Toast.makeText(this, "Signed in!", Toast.LENGTH_SHORT).show();
-            mProgressBar.setVisibility(View.VISIBLE);
         } else if (resultCode == RESULT_CANCELED) {
             Toast.makeText(this, "Sign in canceled!", Toast.LENGTH_SHORT).show();
         } else if (requestCode == RC_PHOTO_PICKER && resultCode == RESULT_OK) {
@@ -249,16 +246,21 @@ public class MainActivity extends AppCompatActivity {
                 AuthUI.getInstance().signOut(this);
                 return true;
             case R.id.settings_menu:{
-                Toast.makeText(this,"Settings - Under-development",Toast.LENGTH_SHORT)
-                        .show();
+                openSettingsPage();
+                return true;
             }
             case R.id.my_profile_menu:{
                 Toast.makeText(this,"My Profile-Under-development",Toast.LENGTH_SHORT)
                         .show();
+                return true;
             }
             default:
                 return super.onOptionsItemSelected(item);
         }
+    }
+
+    private void openSettingsPage() {
+        startActivity(new Intent(MainActivity.this, SettingsActivity.class));
     }
 
     private void onSignedInInitialize(String username) {
@@ -289,6 +291,7 @@ public class MainActivity extends AppCompatActivity {
             };
             mMessagesDatabaseReference.addChildEventListener(mChildEventListener);
         }
+        else mProgressBar.setVisibility(View.INVISIBLE);
     }
 
     private void detachDatabaseReadListener() {
