@@ -1,0 +1,23 @@
+<PreferenceScreen xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <PreferenceCategory
+        app:iconSpaceReserved="false"
+        app:title="General">
+
+        <SwitchPreferenceCompat
+            app:iconSpaceReserved="false"
+            app:key="theme_toggle"
+            app:summaryOff="Light"
+            app:summaryOn="Dark"
+            app:title="Theme" />
+
+        <CheckBoxPreference
+            app:defaultValue="true"
+            app:iconSpaceReserved="false"
+            app:key="notification_enable"
+            app:summaryOff="Disabled"
+            app:summaryOn="Enabled"
+            app:title="Notification" />
+    </PreferenceCategory>
+
+</PreferenceScreen>
