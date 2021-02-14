@@ -2,21 +2,29 @@ package com.binduhait.friendlychat;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.SharedPreferences;
+import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
-
 
 import com.bumptech.glide.Glide;
 
 import java.util.List;
 
+import static android.content.Context.MODE_PRIVATE;
+
 public class MessageAdapter extends ArrayAdapter<FriendlyMessage> {
+
+    private final SharedPreferences sharedPreferences;
+    private final String SHARED_PREF = "MY_SHARED_PREF";
 
     public MessageAdapter(Context context, int resource, List<FriendlyMessage> objects) {
         super(context, resource, objects);
+        sharedPreferences = context.getSharedPreferences(SHARED_PREF, MODE_PRIVATE);
     }
 
     @Override
@@ -28,6 +36,7 @@ public class MessageAdapter extends ArrayAdapter<FriendlyMessage> {
         ImageView photoImageView = (ImageView) convertView.findViewById(R.id.photoImageView);
         TextView messageTextView = (TextView) convertView.findViewById(R.id.messageTextView);
         TextView authorTextView = (TextView) convertView.findViewById(R.id.nameTextView);
+        LinearLayout layout = convertView.findViewById(R.id.parent_item);
 
         FriendlyMessage message = getItem(position);
 
@@ -44,6 +53,11 @@ public class MessageAdapter extends ArrayAdapter<FriendlyMessage> {
             messageTextView.setText(message.getText());
         }
         authorTextView.setText(message.getName());
+
+        String currentUser = sharedPreferences.getString("username",null);
+        if(message.getName().equalsIgnoreCase(currentUser)){
+            layout.setGravity(Gravity.END);
+        }
 
         return convertView;
     }

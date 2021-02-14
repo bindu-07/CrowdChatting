@@ -1,6 +1,7 @@
 package com.binduhait.friendlychat;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.text.Editable;
@@ -67,6 +68,8 @@ public class MainActivity extends AppCompatActivity {
     private Button mSendButton;
 
     private String mUsername;
+    private SharedPreferences sharedPreferences;
+    private final String SHARED_PREF = "MY_SHARED_PREF";
 
     private FirebaseDatabase mFirebaseDatabase;
     private DatabaseReference mMessagesDatabaseReference;
@@ -82,7 +85,9 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        sharedPreferences = getSharedPreferences(SHARED_PREF, MODE_PRIVATE);
         mUsername = ANONYMOUS;
+        sharedPreferences.edit().putString("username",mUsername).apply();
 
         // Initialize Firebase components
         mFirebaseDatabase = FirebaseDatabase.getInstance();
@@ -265,11 +270,13 @@ public class MainActivity extends AppCompatActivity {
 
     private void onSignedInInitialize(String username) {
         mUsername = username;
+        sharedPreferences.edit().putString("username",username).apply();
         attachDatabaseReadListener();
     }
 
     private void onSignedOutCleanup() {
         mUsername = ANONYMOUS;
+        sharedPreferences.edit().putString("username",mUsername).apply();
         mMessageAdapter.clear();
         detachDatabaseReadListener();
     }
