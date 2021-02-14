@@ -5,14 +5,16 @@ public class FriendlyMessage {
     private String text;
     private String name;
     private String photoUrl;
+    private String time;
 
     public FriendlyMessage() {
     }
 
-    public FriendlyMessage(String text, String name, String photoUrl) {
+    public FriendlyMessage(String text, String name, String photoUrl,String time) {
         this.text = text;
         this.name = name;
         this.photoUrl = photoUrl;
+        this.time = time;
     }
 
     public String getText() {
@@ -37,5 +39,13 @@ public class FriendlyMessage {
 
     public void setPhotoUrl(String photoUrl) {
         this.photoUrl = photoUrl;
+    }
+
+    public String getTime() {
+        return time;
+    }
+
+    public void setTime(String time) {
+        this.time = time;
     }
 }
