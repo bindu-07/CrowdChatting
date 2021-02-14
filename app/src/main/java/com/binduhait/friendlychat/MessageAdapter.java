@@ -10,6 +10,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 
@@ -37,6 +38,7 @@ public class MessageAdapter extends ArrayAdapter<FriendlyMessage> {
         TextView messageTextView = (TextView) convertView.findViewById(R.id.messageTextView);
         TextView authorTextView = (TextView) convertView.findViewById(R.id.nameTextView);
         LinearLayout layout = convertView.findViewById(R.id.parent_item);
+        TextView timeTv = convertView.findViewById(R.id.timeTextView);
 
         FriendlyMessage message = getItem(position);
 
@@ -53,6 +55,9 @@ public class MessageAdapter extends ArrayAdapter<FriendlyMessage> {
             messageTextView.setText(message.getText());
         }
         authorTextView.setText(message.getName());
+        if(message.getTime()!=null)
+            timeTv.setText(message.getTime());
+        else timeTv.setVisibility(View.GONE);
 
         String currentUser = sharedPreferences.getString("username",null);
         if(message.getName().equalsIgnoreCase(currentUser)){

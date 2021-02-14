@@ -42,8 +42,10 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -148,7 +150,7 @@ public class MainActivity extends AppCompatActivity {
         mSendButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                FriendlyMessage friendlyMessage = new FriendlyMessage(mMessageEditText.getText().toString(), mUsername, null);
+                FriendlyMessage friendlyMessage = new FriendlyMessage(mMessageEditText.getText().toString(), mUsername, null,getCurrentDateTime());
                 mMessagesDatabaseReference.push().setValue(friendlyMessage);
 
                 // Clear input box
@@ -211,7 +213,7 @@ public class MainActivity extends AppCompatActivity {
                                 @Override
                                 public void onSuccess(Uri uri) {
                                     Uri dlUri = uri;
-                                    FriendlyMessage friendlyMessage = new FriendlyMessage(null, mUsername, dlUri.toString());
+                                    FriendlyMessage friendlyMessage = new FriendlyMessage(null, mUsername, dlUri.toString(),getCurrentDateTime());
                                     mMessagesDatabaseReference.push().setValue(friendlyMessage);
                                 }
                             });
@@ -306,6 +308,12 @@ public class MainActivity extends AppCompatActivity {
             mMessagesDatabaseReference.removeEventListener(mChildEventListener);
             mChildEventListener = null;
         }
+    }
+
+    private String getCurrentDateTime(){
+        SimpleDateFormat sdf = new SimpleDateFormat("hh:mm aa, dd-MMM-YY");
+        Calendar c = Calendar.getInstance();
+        return sdf.format(c.getTime());
     }
 
 }
